@@ -107,8 +107,9 @@ type PulsarClusterSpec struct {
 	// JVMOptions defines the JVM options for pulsar broker; this is useful for performance tuning.
 	// If unspecified, a reasonable defaults will be set
 	// +optional
-	JVMOptions  JVMOptions                    `json:"jvmOptions"`
-	Persistence *v1.PersistentVolumeClaimSpec `json:"persistence,omitempty"`
+	JVMOptions       JVMOptions                    `json:"jvmOptions"`
+	InitJobResources v1.ResourceRequirements       `json:"resources,omitempty"`
+	Persistence      *v1.PersistentVolumeClaimSpec `json:"persistence,omitempty"`
 	// PodConfig defines common configuration for the broker pods
 	// +optional
 	PodConfig basetype.PodConfig `json:"podConfig,omitempty"`
@@ -327,10 +328,8 @@ func (in *PulsarClusterSpec) createLabels(clusterName string, broker bool) map[s
 		labels["broker"] = "true"
 	}
 	labels["app"] = "pulsar"
-	labels["version"] = in.PulsarVersion
 	labels[k8s.LabelAppName] = "pulsar"
 	labels[k8s.LabelAppInstance] = clusterName
-	labels[k8s.LabelAppVersion] = in.PulsarVersion
 	labels[k8s.LabelAppManagedBy] = internal.OperatorName
 	return labels
 }

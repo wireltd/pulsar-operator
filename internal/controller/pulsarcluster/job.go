@@ -99,11 +99,16 @@ func createClusterMetadataInitJob(c *v1alpha1.PulsarCluster) *v1.Job {
 }
 
 func createJobPodSpecContainers(c *v1alpha1.PulsarCluster) []coreV1.Container {
+	initJobResources := c.Spec.InitJobResources
+	if initJobResources.Limits == nil || initJobResources.Requests == nil {
+		initJobResources = c.Spec.PodConfig.Spec.Resources
+	}
 	return []coreV1.Container{
 		{
 			Name:            "cluster-metadata-init",
 			Image:           c.Image().ToString(),
 			ImagePullPolicy: c.Image().PullPolicy,
+			Resources:       initJobResources,
 			Command:         k8s.ContainerShellCommand(),
 			Args:            createJobPodContainerArguments(c),
 			EnvFrom: []coreV1.EnvFromSource{
