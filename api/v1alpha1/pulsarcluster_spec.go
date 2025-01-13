@@ -108,7 +108,7 @@ type PulsarClusterSpec struct {
 	// If unspecified, a reasonable defaults will be set
 	// +optional
 	JVMOptions       JVMOptions                    `json:"jvmOptions"`
-	InitJobResources v1.ResourceRequirements       `json:"resources,omitempty"`
+	InitJobResources v1.ResourceRequirements       `json:"initJobResources,omitempty"`
 	Persistence      *v1.PersistentVolumeClaimSpec `json:"persistence,omitempty"`
 	// PodConfig defines common configuration for the broker pods
 	// +optional
