@@ -11,10 +11,10 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   labels:
-    helm.sh/chart: pulsar-operator-0.2.0
+    helm.sh/chart: pulsar-operator-0.2.1
     app.kubernetes.io/name: pulsar-operator
     app.kubernetes.io/instance: pulsar-operator
-    app.kubernetes.io/version: "0.2.0"
+    app.kubernetes.io/version: "0.2.1"
     app.kubernetes.io/managed-by: Helm
   name: pulsar-operator
 ---
@@ -31,14 +31,14 @@ metadata:
   name: pulsar-operator-pulsar-operator-webhook-secret
   namespace: pulsar-operator
   labels:
-    helm.sh/chart: pulsar-operator-0.2.0
+    helm.sh/chart: pulsar-operator-0.2.1
     app.kubernetes.io/name: pulsar-operator
     app.kubernetes.io/instance: pulsar-operator
-    app.kubernetes.io/version: "0.2.0"
+    app.kubernetes.io/version: "0.2.1"
     app.kubernetes.io/managed-by: Helm
 data:
-  tls.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUVCakNDQXU2Z0F3SUJBZ0lRSnZsckJFVTJPZUh3S1Vpc2IyaVk4REFOQmdrcWhraUc5dzBCQVFzRkFEQVoKTVJjd0ZRWURWUVFERXc1M1pXSnZiMnN0Y205dmRDMWpZVEFlRncweU16RXhNVFF4TVRFNE1EbGFGdzB6TXpFeApNVEV4TVRFNE1EbGFNRG94T0RBMkJnTlZCQU1UTDNCMWJITmhjaTF2Y0dWeVlYUnZjaTF3ZFd4ellYSXRiM0JsCmNtRjBiM0l0ZDJWaWFHOXZheTF6WlhKMmFXTmxNSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DQVE4QU1JSUIKQ2dLQ0FRRUF1VlkrZWk0VC83M2xvV2NMWk1IU3JWM2NTcDhWOEJsKzVLZklTczBFZlRwYnJlM0Q0YlQ4YWhqZQpQNm1sQWVhRElGUlBzQ0JlU0xMdnI4OTZVZWNOZlQybWtmNkdLdExrMVlGRWl6ZEY0dWx3M2tyeElKU2lnVDl5CjdrclZJaUU0d2JOSng0SVkxdm4yZHNQMDZYd1FGdVY2bTBNT2tFMlJCZGtxbWxRWk5IaWpqT1REMnJBMDN4NzkKejZjQXdRUWNXM2RUR0hvaUx6UFc5ajZiRElZQ3lqM2FHWTd6SDI4Z0FyNE9MN2ppZ0lxWEV2Y3hsdmRTNitqawpzQWxFUWtZRW5nSTVnZ1R5VEFTaGw3aDIwbk1idWN5MHRNOXJCODAvdm5MRkQ3Q2RmNC9tVldwNmFGK0M5WEZMCno3YVQ4ZCtSckkxalMyMEo2aHFWNG9xVHRrQXl3UUlEQVFBQm80SUJKekNDQVNNd0RnWURWUjBQQVFIL0JBUUQKQWdXZ01CMEdBMVVkSlFRV01CUUdDQ3NHQVFVRkJ3TUJCZ2dyQmdFRkJRY0RBakFNQmdOVkhSTUJBZjhFQWpBQQpNQjhHQTFVZEl3UVlNQmFBRkFWVWFod0dCQmV5QkVOYUZtQ0RYQm9admxEd01JSENCZ05WSFJFRWdib3dnYmVDCkwzQjFiSE5oY2kxdmNHVnlZWFJ2Y2kxd2RXeHpZWEl0YjNCbGNtRjBiM0l0ZDJWaWFHOXZheTF6WlhKMmFXTmwKZ2o5d2RXeHpZWEl0YjNCbGNtRjBiM0l0Y0hWc2MyRnlMVzl3WlhKaGRHOXlMWGRsWW1odmIyc3RjMlZ5ZG1sagpaUzV3ZFd4ellYSXRiM0JsY21GMGIzS0NRM0IxYkhOaGNpMXZjR1Z5WVhSdmNpMXdkV3h6WVhJdGIzQmxjbUYwCmIzSXRkMlZpYUc5dmF5MXpaWEoyYVdObExuQjFiSE5oY2kxdmNHVnlZWFJ2Y2k1emRtTXdEUVlKS29aSWh2Y04KQVFFTEJRQURnZ0VCQUJKQkZUbVFUM3ZyUnlibmFjR0lvVHFuNnl5UUZob2c5VXdCa3NZTU5pOXZOMy9YekxxMQpTYXNpdm0xUTUyQ0FJRkMyVkhoQWNZUGFXV21Rd1M5Sm44ME10c3ExdTg3TTZVMzhZMWhUWlJvWDZrdjBkT1pQCkhVeVVJbFhDN2crZ3licVhWRzBOaEYrd0ZOY2MrZ2ZvanpibElGeVpzcUFSclF6MHovOVQvb0lsSXRCTVJleXoKWmVhMFlVVkpGZGI4QWFTQWEzbEx4eE51WmNFQlBYNGFFUVpMWHFzdnlCNGFOMlh0SlR4eWRyTU5ZZ0ZGU3FJYwp3OTFVSXlOQ0VNaGloeXF6VWJNbitOdmMya0pJT3Q1NTBhelRxamZaWm8wYXZQakdEVTFHbnpIdEhIVjBobXl2CnhDcG1GMFhkSWdNZFRZb0xUZ0FoUXVJZWtMS1krRUczenk4PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
-  tls.key: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFcFFJQkFBS0NBUUVBdVZZK2VpNFQvNzNsb1djTFpNSFNyVjNjU3A4VjhCbCs1S2ZJU3MwRWZUcGJyZTNECjRiVDhhaGplUDZtbEFlYURJRlJQc0NCZVNMTHZyODk2VWVjTmZUMm1rZjZHS3RMazFZRkVpemRGNHVsdzNrcngKSUpTaWdUOXk3a3JWSWlFNHdiTkp4NElZMXZuMmRzUDA2WHdRRnVWNm0wTU9rRTJSQmRrcW1sUVpOSGlqak9URAoyckEwM3g3OXo2Y0F3UVFjVzNkVEdIb2lMelBXOWo2YkRJWUN5ajNhR1k3ekgyOGdBcjRPTDdqaWdJcVhFdmN4Cmx2ZFM2K2prc0FsRVFrWUVuZ0k1Z2dUeVRBU2hsN2gyMG5NYnVjeTB0TTlyQjgwL3ZuTEZEN0NkZjQvbVZXcDYKYUYrQzlYRkx6N2FUOGQrUnJJMWpTMjBKNmhxVjRvcVR0a0F5d1FJREFRQUJBb0lCQVFDcUFPMHdQNklDblZyTQpjV3ZuRVU5QnpXM3JXUC9UakY5ME9GOG1GZWIvUTQraS9BMEl0VzR2bC80TllYeEZRUCtZb1IyempnMU9IQ3gyCkZSZTdsdmd0b0daeFZvb1ZML3ZOeUZScWF0b0ZLV0pwMVU1WE4xL1V0TEdrMlNtbHM5bU8rL2s2TXlDNzJPOTEKdzR1Y3ZEczU5V2RBa2dNQzVOT1pETG5pZEMvbWl3Nll3R09ac3Z4Ry9Wb2JqT01ubFpybWNEbFN2T1o0Y2IrNQp2L2dLYXlMWFlxcmllRUhKOGpXa09SODRKSWx3OWZFTis3RzZVREVuNjNuUmRVcEMwbUFvMmc4Uk9NOUx1QWxTCkMvNmhvbmhIaHlpNnpwNWloVVVoT1VoeWZhWVpuRHJwTUVXQmpUUWJ4STk2VFd6N0lDQ08vYW1meU41UkY3Y1oKZ1VjKzJWcU5Bb0dCQU9CM3dTQkxucndLOVIxT3pnSUlUdllQM0JvdVRpRzc2eFZNVlBEM0RSc0VBQS85TUswOQpnYVBkVkp5eDR5aDlNRHNnWlBzcHRnR1NwTjE4eFdoYmllRmY0UXAraEpUWXRYMjVRckpSTDRVWWtXaHBpanY1CldFM1pHR0pPRGl2UkROOUZFeXFxaTYwNTNaeWNpYkltVUd3aXJISSszUjRCNW9Nd3N2SnZiYVZYQW9HQkFOTmYKUm94eWxLTm1zUmpLNm5PdDZMam5Gb3VkZERkeWkrcXBtRHZ4ekV4dU1MdFZUY21HV2xFcHlEa1ZEMFlIMWVYNApZcFFGS1IxY1F0TDNPVlZLSE9oeTVWU3BjNXpsU0VlTTlyUW1URFFtNHg3T0NOL0NIYmNXanU3UG9LbFg3MTJ4Clc4MGZCQ3kwUzlla3ZMM1ozTzhQSFJMRk1BUHFxaWtaQmpYb0RBR25Bb0dCQU53M29OazJWenpVNHpVbG95YUwKVUN4SDB3QThmWnJLNmcrekc0SnNYZ2NySFlTU09iYzhxSHRESVVlNW5jcVRSMFk2dWRkUFRLaXVYZUNPRUg0WgprR1B6MUt5ZkF5T2ttQ29JSDA4aUp5VEV2YU5hSjZ3L0xFcnp1ZUI0QTU4cE1SKzZmTnRYQmtHa2k2NmlSTlRxCmtld0UrSG45QXFIMTYxaTU1bFhDekNkeEFvR0JBSmZxUEF3cE5jY1N3V211UFQ4UzJOWTcwQ3BiNmZFSDlLT2QKYkhwNDJIcCtINndrTFJvUDQ4MjlsOWZlMlBGZUpFOTZhMjh6SGsrcHhhVldaZkIwcWI0dkJjQUpZYng3MWEwSApGVEI0N2YvMWl2clMzZkhqMC9PSTFRV3lXQ2dkdVQyL2dOazExNHhCc05pMTM2a2JjZnluQWlCQmRMYjc2M3hLCkxmcUVZa3kxQW9HQU5ZZ1Z4S0loTmxmVGFidE9kUFQ4Z2tQNkhQNjFpVktYeTFUK3lscjJSTThsK1packx6UTgKUnhWc0lDZ0VaZHNma0t6NG1NS3llOXdTSjExMUVJSGpNSThuaTE0a2VjL0wwTE5HcHNnbnBEUEs3R2ZoV2N0VAo2RnQrVGNzVVh1dGw2eG9obUhDcnNUckRoMTUzZGdiaUVBK05rd25XWTNEb3Q2T3FhejRvRFRZPQotLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLQo=
+  tls.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUVCekNDQXUrZ0F3SUJBZ0lSQU9pQmh5K1lDWnlTMUJQVG5xSFcrQmN3RFFZSktvWklodmNOQVFFTEJRQXcKR1RFWE1CVUdBMVVFQXhNT2QyVmliMjlyTFhKdmIzUXRZMkV3SGhjTk1qVXdNVEF5TURNeU1qQTVXaGNOTXpReApNak14TURNeU1qQTVXakE2TVRnd05nWURWUVFERXk5d2RXeHpZWEl0YjNCbGNtRjBiM0l0Y0hWc2MyRnlMVzl3ClpYSmhkRzl5TFhkbFltaHZiMnN0YzJWeWRtbGpaVENDQVNJd0RRWUpLb1pJaHZjTkFRRUJCUUFEZ2dFUEFEQ0MKQVFvQ2dnRUJBS2Fyd0ZTYzJ0Sy9td3ZaOHFjelFxR2ZkUWxwMERJdEZKdXN1TkxMS1ROTkpWcjNjWkdOUTR4awo4aUxYUGtUcjNvbGhTZzh6bGdsU1paNitHVEZQTENJWWoxa3Myb0hvNElYTmFVQlgxL0tJQk4yenhSY1hWVjJkCmQxN1ByTHc0SVVLQnFuTS9Yb2hxUDEwVWhmdTloWTFpejdMK21ERGwvdG5OaytHL3FVSkI3WjAvN3JWTkhzTlEKL2FTeGtTRUlVWlNSemdRcm9YZm82TDRGNjNSbmhFdlIvaitPK0ppaWVzUFJacW1rT1BxY1ZwTkFCTDBMVzFRTwpuM3NPSlBWWG9RSEZVZUVDTDRPNGZvUEtzb1orRlBjTk9XNGlIYVFyNVVEVEtRejUwMG84cWdpWU9JUEJPR0VqCkVUaUMyZWNsVUFFYTNZN0k1aWhiNzd2TFRhajc4OGtDQXdFQUFhT0NBU2N3Z2dFak1BNEdBMVVkRHdFQi93UUUKQXdJRm9EQWRCZ05WSFNVRUZqQVVCZ2dyQmdFRkJRY0RBUVlJS3dZQkJRVUhBd0l3REFZRFZSMFRBUUgvQkFJdwpBREFmQmdOVkhTTUVHREFXZ0JSK3o3Wm9lb0Y2enFBbnBrM0F6SjhhL3RBd05EQ0J3Z1lEVlIwUkJJRzZNSUczCmdpOXdkV3h6WVhJdGIzQmxjbUYwYjNJdGNIVnNjMkZ5TFc5d1pYSmhkRzl5TFhkbFltaHZiMnN0YzJWeWRtbGoKWllJL2NIVnNjMkZ5TFc5d1pYSmhkRzl5TFhCMWJITmhjaTF2Y0dWeVlYUnZjaTEzWldKb2IyOXJMWE5sY25acApZMlV1Y0hWc2MyRnlMVzl3WlhKaGRHOXlna053ZFd4ellYSXRiM0JsY21GMGIzSXRjSFZzYzJGeUxXOXdaWEpoCmRHOXlMWGRsWW1odmIyc3RjMlZ5ZG1salpTNXdkV3h6WVhJdGIzQmxjbUYwYjNJdWMzWmpNQTBHQ1NxR1NJYjMKRFFFQkN3VUFBNElCQVFCOXVSRnNranBYSmNlQ2x6VVlSSVJkVU1QdmttN2U2QlczS0k1UGJMaVQ0elM5QW1pTgpLc0dYWFpaelB6YlVFa0NxMGE0TnZ4bUp3dW5ZVXpsL3FGSkNFUkI5YkZKd2ZOR3p6NFQ1YkNjdmk2ZW5uNDJ3CkVJNEhhNGR5S0FDOVlIZGpzUXcyWUMrQlhBblNrNUFUWGVCVU9WdUtIV20zTjM0SzJzQW9DYm1OZXFhNkVCVGMKTlBxTHk4WWtSSzdEdWhSWVJneHpZOEZxbTNTaWYxOW5FSytDY0hqOERTMXI0Yjh4TVJIbkYxK0dVbkxvcTJvMQpmZGhsVEhLV0UrZXd0WVNLZWx1aTZ1eklBTU9wdEhVUVZmRFJLZy9KYnFDeXozZnlBNDVsWDVyaTNQU2VpRDhGCkxqNlBlNE9LenJtcmxmN2w3UXUzWmxMQUVXWHVITzMyMldldQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+  tls.key: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb3dJQkFBS0NBUUVBcHF2QVZKemEwcitiQzlueXB6TkNvWjkxQ1duUU1pMFVtNnk0MHNzcE0wMGxXdmR4CmtZMURqR1R5SXRjK1JPdmVpV0ZLRHpPV0NWSmxucjRaTVU4c0loaVBXU3phZ2VqZ2hjMXBRRmZYOG9nRTNiUEYKRnhkVlhaMTNYcytzdkRnaFFvR3FjejllaUdvL1hSU0YrNzJGaldMUHN2NllNT1grMmMyVDRiK3BRa0h0blQvdQp0VTBldzFEOXBMR1JJUWhSbEpIT0JDdWhkK2pvdmdYcmRHZUVTOUgrUDQ3NG1LSjZ3OUZtcWFRNCtweFdrMEFFCnZRdGJWQTZmZXc0azlWZWhBY1ZSNFFJdmc3aCtnOHF5aG40VTl3MDViaUlkcEN2bFFOTXBEUG5UU2p5cUNKZzQKZzhFNFlTTVJPSUxaNXlWUUFScmRqc2ptS0Z2dnU4dE5xUHZ6eVFJREFRQUJBb0lCQUVMOVEwZCs2QURPM0YyTwpFeGFhNXN3WlVDd2hhSG5TWHJjWFhBMzFkRERYY0EwNDZWK3NISnRBTTRaSFp4TENqdVkrd1VxTTNHQVF5eUZiCm5McVI3TllqY3ZKUHNkK0hIejhJU2FaLzZCN21CcmFwTzYxRlJwMWkzZ2l3aGVmODAzbHNybnExM0tRTnVEd00KTkxIekFjdkxERm9RTkZGckQ5eXc0U0JhTFlpZ1dyVzFaSzl6MGRiODVkM1NPSFpORHloU3pNSkNORmZwSXJrUwpITGNsME84bHpHUThIS2gvRThDREI4SjgzL1NPQmFLUTByTThLQVoxVTNGZDNsV1hQbXQ5R3NQNEFpTm1MTHBuCkMwZmJqVXB6ZjNTa2VETjFPL1VlT3BsZnBnWTk4UUZEWVNPRTM5SEluTzVjZFM5TWVFdllsUHJRNDBTQU8zZUsKUEJITEsxRUNnWUVBd3pRdnQvbXdFZUNOZ1o0MHdGWVhaOXYvTW05MG55QkZxMFJpOXozaUVqaG9rNldoRU8vdgpDa2c0aTBzd2NZa1F4cTFaT2dybFNZQXZyU2VYL1J0SWZNSVowVlY3T005VkkrTDNrSjdxKzFtLzRDamxpU3h1CmtPdjF3NWpuOUhjUEMwYzE5NFdwNHZHOUR2SjZKY0pUQ0EwSElqRllFN0JaK0JDRlcvOTBEbDBDZ1lFQTJwU2EKSUwyd09QUERuemd0cWZFcldOUy9ZWVZabU5OTnByVUU4eGZCcHUrbVRIdVZLaU45UzAyWFI2UE1kVE1td2d6dApaZDBxUHdONE9KTmcydThCekRncjloZUVkSW5NT2ljSVJ2MzMxVFJmR3d6UGh5N1lYTjd0UFpKZXlqdHBWczVUClN2djk1WW1ZaWdQSEpWUit0RXRYcGRXUW8rd1ZOZlZWSU4yWjdGMENnWUVBa3ovaG96bHh6UHFFSkR2UWRTbzgKTzdkam1Zc2tBUWxhSktqUXNzcjJwMkh2MlRpKytFVFdILzU4ME82bUcyOFd2WmgwVDJsNnJ1aElqcWpvYVNEVQpuRy9iQStNa3NhVU5CNllscysxOU9wL29NdE1HMjJRdC81cFBhUDRHTTQ1QVJmU3d6QWdETUZQRWx1cm9vMlVrCk4xV0VoUkdON0VSQ2lmTUVkbktML0cwQ2dZQVRHNFJ4c2tOU1p6VEZtV0tjaFlHVmpWdUJpZWV3TFdDUFh5bWsKbW9JS05zN2h4cmZlYkNYS3pHaWFFWjZRN0R6S0g5a3MyMjJTL3BtbTBITmFFQ1NuRm8zNVFFc0s2UFRhYklrVApzNlhUbEhWdjV1bkpWbllCZ0ZkYTE0M0R2ZmZTWjh6dU5DTVl5ck56OVNxV2Y5Rm5yMkpsRTh0R0dTQXRqRm01CnVzVjIzUUtCZ0cwM2MxemZwT3lubHp3MXBaNmpEb3Q4eVlQUjNPZVV5NlNFQVQ0a0Iyb0V1RnBJNFlPNVdzK2kKMTFHNUk2b1hqVjVwdGNMeEpXVy8xWmhENzF4a3dkdzVxWkhPM2orNXFuUWhLMEk0UU8xY1ZOV3c2UmZzRWZTagpuZEc4WTRDOXJqS1phTmZYbE4xZjlnOTh4R0phS2FOeTQxbGx5N1owYjNDSHZ2QjV4Q0ttCi0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tCg==
 ---
 # Source: pulsar-operator/templates/clusterrole.yaml
 # @formatter:off
@@ -47,10 +47,10 @@ kind: ClusterRole
 metadata:
   name: pulsar-operator-manager-role
   labels:
-    helm.sh/chart: pulsar-operator-0.2.0
+    helm.sh/chart: pulsar-operator-0.2.1
     app.kubernetes.io/name: pulsar-operator
     app.kubernetes.io/instance: pulsar-operator
-    app.kubernetes.io/version: "0.2.0"
+    app.kubernetes.io/version: "0.2.1"
     app.kubernetes.io/managed-by: Helm
 rules:
   - apiGroups:
@@ -127,10 +127,10 @@ kind: ClusterRoleBinding
 metadata:
   name: pulsar-operator-manager-role-binding
   labels:
-    helm.sh/chart: pulsar-operator-0.2.0
+    helm.sh/chart: pulsar-operator-0.2.1
     app.kubernetes.io/name: pulsar-operator
     app.kubernetes.io/instance: pulsar-operator
-    app.kubernetes.io/version: "0.2.0"
+    app.kubernetes.io/version: "0.2.1"
     app.kubernetes.io/managed-by: Helm
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -150,10 +150,10 @@ metadata:
   name: pulsar-operator-leader-election-role
   namespace: pulsar-operator
   labels:
-    helm.sh/chart: pulsar-operator-0.2.0
+    helm.sh/chart: pulsar-operator-0.2.1
     app.kubernetes.io/name: pulsar-operator
     app.kubernetes.io/instance: pulsar-operator
-    app.kubernetes.io/version: "0.2.0"
+    app.kubernetes.io/version: "0.2.1"
     app.kubernetes.io/managed-by: Helm
 rules:
   - apiGroups:
@@ -196,10 +196,10 @@ metadata:
   name: pulsar-operator-leader-election-role-binding
   namespace: pulsar-operator
   labels:
-    helm.sh/chart: pulsar-operator-0.2.0
+    helm.sh/chart: pulsar-operator-0.2.1
     app.kubernetes.io/name: pulsar-operator
     app.kubernetes.io/instance: pulsar-operator
-    app.kubernetes.io/version: "0.2.0"
+    app.kubernetes.io/version: "0.2.1"
     app.kubernetes.io/managed-by: Helm
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -218,10 +218,10 @@ metadata:
   name: pulsar-operator-pulsar-operator-webhook-service
   namespace: pulsar-operator
   labels:
-    helm.sh/chart: pulsar-operator-0.2.0
+    helm.sh/chart: pulsar-operator-0.2.1
     app.kubernetes.io/name: pulsar-operator
     app.kubernetes.io/instance: pulsar-operator
-    app.kubernetes.io/version: "0.2.0"
+    app.kubernetes.io/version: "0.2.1"
     app.kubernetes.io/managed-by: Helm
 spec:
   ports:
@@ -238,10 +238,10 @@ metadata:
   name: pulsar-operator-controller-manager-metrics-service
   namespace: pulsar-operator
   labels:
-    helm.sh/chart: pulsar-operator-0.2.0
+    helm.sh/chart: pulsar-operator-0.2.1
     app.kubernetes.io/name: pulsar-operator
     app.kubernetes.io/instance: pulsar-operator
-    app.kubernetes.io/version: "0.2.0"
+    app.kubernetes.io/version: "0.2.1"
     app.kubernetes.io/managed-by: Helm
 spec:
   ports:
@@ -261,10 +261,10 @@ metadata:
   name: pulsar-operator
   namespace: pulsar-operator
   labels:
-    helm.sh/chart: pulsar-operator-0.2.0
+    helm.sh/chart: pulsar-operator-0.2.1
     app.kubernetes.io/name: pulsar-operator
     app.kubernetes.io/instance: pulsar-operator
-    app.kubernetes.io/version: "0.2.0"
+    app.kubernetes.io/version: "0.2.1"
     app.kubernetes.io/managed-by: Helm
 spec:
   replicas: 1
@@ -280,7 +280,7 @@ spec:
     spec:
       containers:
         - name: pulsar-operator
-          image: monime/pulsar-operator:v0.2.0
+          image: monime/pulsar-operator:v0.2.1
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
