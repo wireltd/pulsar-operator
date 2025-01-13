@@ -26,5 +26,4 @@ api/v1alpha1/**/zz_generated.*
 *~
 
 output
-config/crd/bases/
 config/webhook/manifests.yaml
