@@ -1831,6 +1831,9 @@ spec:
                     type: object
                   pulsarVersion:
                     type: string
+                  size:
+                    format: int32
+                    type: integer
                   stage:
                     description: ClusterStage represents the stage of the pulsar broker
                       cluster
