@@ -22,11 +22,11 @@ import (
 	"github.com/monimesl/operator-helper/k8s"
 	"github.com/monimesl/operator-helper/k8s/pod"
 	"github.com/monimesl/operator-helper/k8s/pvc"
-	"github.com/monimesl/operator-helper/k8s/statefulset"
 	"github.com/monimesl/operator-helper/reconciler"
 	"github.com/monimesl/pulsar-operator/api/v1alpha1"
 	v1 "k8s.io/api/apps/v1"
 	v12 "k8s.io/api/core/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/types"
 	"k8s.io/apimachinery/pkg/util/intstr"
 	"strings"
@@ -48,7 +48,7 @@ func ReconcileStatefulSet(ctx reconciler.Context, cluster *v1alpha1.PulsarCluste
 	}, sts,
 		// Found
 		func() error {
-			if shouldUpdateStatefulSet(cluster.Spec, sts) {
+			if shouldUpdateStatefulSet(ctx, cluster, sts) {
 				if err := updateStatefulset(ctx, sts, cluster); err != nil {
 					return err
 				}
@@ -74,11 +74,22 @@ func ReconcileStatefulSet(ctx reconciler.Context, cluster *v1alpha1.PulsarCluste
 		})
 }
 
-func shouldUpdateStatefulSet(spec v1alpha1.PulsarClusterSpec, sts *v1.StatefulSet) bool {
-	if *spec.Size != *sts.Spec.Replicas {
+func shouldUpdateStatefulSet(ctx reconciler.Context, c *v1alpha1.PulsarCluster, sts *v1.StatefulSet) bool {
+	if *c.Spec.Size != *sts.Spec.Replicas {
+		ctx.Logger().Info("Bookkeeper cluster size changed",
+			"from", *sts.Spec.Replicas, "to", *c.Spec.Size)
 		return true
 	}
-	if spec.PulsarVersion != sts.Labels[k8s.LabelAppVersion] {
+	if c.Spec.PulsarVersion != c.Status.Metadata.PulsarVersion {
+		ctx.Logger().Info("Pulsar version changed",
+			"from", c.Status.Metadata.PulsarVersion, "to", c.Spec.PulsarVersion,
+		)
+		return true
+	}
+	if !mapEqual(c.Spec.BrokerConfig, c.Status.Metadata.BrokerConfig) {
+		ctx.Logger().Info("Pulsar cluster config changed",
+			"from", c.Status.Metadata.BrokerConfig, "to", c.Spec.BrokerConfig,
+		)
 		return true
 	}
 	return false
@@ -86,30 +97,60 @@ func shouldUpdateStatefulSet(spec v1alpha1.PulsarClusterSpec, sts *v1.StatefulSe
 
 func updateStatefulset(ctx reconciler.Context, sts *v1.StatefulSet, cluster *v1alpha1.PulsarCluster) error {
 	sts.Spec.Replicas = cluster.Spec.Size
-	sts.Labels = cluster.GenerateLabels(true)
-	sts.Spec.Selector.MatchLabels = getBrokerSelectorLabels(cluster, true)
-	ctx.Logger().Info("Updating the pulsar broker  statefulset.",
+	containers := sts.Spec.Template.Spec.Containers
+	for i, container := range containers {
+		if container.Name == "pulsar-broker" {
+			container.Image = cluster.Image().ToString()
+			containers[i] = container
+		}
+	}
+	sts.Spec.Template.Spec.Containers = containers
+	ctx.Logger().Info("Updating the pulsar broker statefulset.",
 		"StatefulSet.Name", sts.GetName(),
-		"StatefulSet.Namespace", sts.GetNamespace(), "NewReplicas", cluster.Spec.Size)
+		"StatefulSet.Namespace", sts.GetNamespace(),
+		"NewReplicas", cluster.Spec.Size,
+		"NewVersion", cluster.Spec.PulsarVersion)
 	return ctx.Client().Update(context.TODO(), sts)
 }
 
 func createStatefulSet(c *v1alpha1.PulsarCluster) *v1.StatefulSet {
-	pvcs := createPersistentVolumeClaims(c)
-	brokerSelectorLabels := getBrokerSelectorLabels(c, true)
-	templateSpec := createPodTemplateSpec(c, brokerSelectorLabels)
-	spec := statefulset.NewSpec(*c.Spec.Size, c.HeadlessServiceName(), brokerSelectorLabels, pvcs, templateSpec)
-	sts := statefulset.New(c.Namespace, c.StatefulSetName(), c.GenerateLabels(true), spec)
-	sts.Annotations = c.GenerateAnnotations()
-	return sts
-}
-
-func createPodTemplateSpec(c *v1alpha1.PulsarCluster, labels map[string]string) v12.PodTemplateSpec {
-	return v12.PodTemplateSpec{
-		ObjectMeta: pod.NewMetadata(c.Spec.PodConfig, "",
-			c.StatefulSetName(), labels,
-			c.GenerateAnnotations()),
-		Spec: createPodSpec(c),
+	labels := c.GenerateLabels(true)
+	return &v1.StatefulSet{
+		TypeMeta: metav1.TypeMeta{
+			Kind:       "StatefulSet",
+			APIVersion: "apps/v1",
+		},
+		ObjectMeta: metav1.ObjectMeta{
+			Name:      c.GetName(),
+			Namespace: c.Namespace,
+			Labels: mergeLabels(labels, map[string]string{
+				k8s.LabelAppVersion: c.Spec.PulsarVersion,
+				"version":           c.Spec.PulsarVersion,
+			}),
+			Annotations: c.GenerateAnnotations(),
+		},
+		Spec: v1.StatefulSetSpec{
+			ServiceName: c.HeadlessServiceName(),
+			Replicas:    c.Spec.Size,
+			Selector: &metav1.LabelSelector{
+				MatchLabels: labels,
+			},
+			UpdateStrategy: v1.StatefulSetUpdateStrategy{
+				Type: v1.RollingUpdateStatefulSetStrategyType,
+			},
+			PodManagementPolicy: v1.OrderedReadyPodManagement,
+			Template: v12.PodTemplateSpec{
+				ObjectMeta: metav1.ObjectMeta{
+					GenerateName: c.GetName(),
+					Labels: mergeLabels(labels,
+						c.Spec.PodConfig.Labels,
+					),
+					Annotations: c.Spec.PodConfig.Annotations,
+				},
+				Spec: createPodSpec(c),
+			},
+			VolumeClaimTemplates: createPersistentVolumeClaims(c),
+		},
 	}
 }
 

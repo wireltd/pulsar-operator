@@ -38,7 +38,10 @@ type PulsarClusterStatus struct {
 
 // Metadata defines the metadata status of the cluster
 type Metadata struct {
-	Stage ClusterStage `json:"stage,omitempty"`
+	Size          int32             `json:"size,omitempty"`
+	Stage         ClusterStage      `json:"stage,omitempty"`
+	PulsarVersion string            `json:"pulsarVersion,omitempty"`
+	BrokerConfig  map[string]string `json:"brokerConfig,omitempty"`
 }
 
 func (in *PulsarClusterStatus) setDefaults() (changed bool) {

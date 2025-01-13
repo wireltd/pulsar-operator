@@ -92,7 +92,7 @@ func createPodDisruptionBudget(cluster *v1alpha1.PulsarCluster) *v1.PodDisruptio
 		Spec: v1.PodDisruptionBudgetSpec{
 			MaxUnavailable: &newMaxFailureNodes,
 			Selector: &metav1.LabelSelector{
-				MatchLabels: getBrokerSelectorLabels(cluster, true),
+				MatchLabels: cluster.GenerateLabels(true),
 			},
 		},
 	}
@@ -102,7 +102,7 @@ func updatePodDisruptionBudget(ctx reconciler.Context, pdb *v1.PodDisruptionBudg
 	newMaxFailureNodes := intstr.FromInt32(c.Spec.MaxUnavailableNodes)
 	pdb.Labels = c.GenerateLabels(true)
 	pdb.Spec.MaxUnavailable.IntVal = newMaxFailureNodes.IntVal
-	pdb.Spec.Selector.MatchLabels = getBrokerSelectorLabels(c, true)
+	pdb.Spec.Selector.MatchLabels = c.GenerateLabels(true)
 	ctx.Logger().Info("Updating the bookkeeper poddisruptionbudget for cluster",
 		"cluster", c.Name,
 		"PodDisruptionBudget.Name", pdb.GetName(),

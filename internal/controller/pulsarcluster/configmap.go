@@ -35,8 +35,10 @@ func ReconcileConfigMap(ctx reconciler.Context, cluster *v1alpha1.PulsarCluster)
 	}, cm,
 		// Found
 		func() error {
-			if err := updateConfigmap(ctx, cm, cluster); err != nil {
-				return err
+			if shouldUpdateConfigmap(ctx, cluster) {
+				if err := updateConfigmap(ctx, cm, cluster); err != nil {
+					return err
+				}
 			}
 			return nil
 		},
@@ -57,10 +59,20 @@ func ReconcileConfigMap(ctx reconciler.Context, cluster *v1alpha1.PulsarCluster)
 		})
 }
 
+func shouldUpdateConfigmap(ctx reconciler.Context, c *v1alpha1.PulsarCluster) bool {
+	if !mapEqual(c.Spec.BrokerConfig, c.Status.Metadata.BrokerConfig) {
+		ctx.Logger().Info("Broker cluster config changed",
+			"from", c.Status.Metadata.BrokerConfig, "to", c.Spec.BrokerConfig,
+		)
+		return true
+	}
+	return false
+}
+
 func createConfigMap(c *v1alpha1.PulsarCluster) *v1.ConfigMap {
 	data := createConfigmapData(c)
 	cm := configmap.New(c.Namespace, c.ConfigMapName(), data)
-	cm.Labels = c.GenerateLabels(true)
+	cm.Labels = c.GenerateLabels(false)
 	return cm
 }
 
@@ -68,7 +80,7 @@ func updateConfigmap(ctx reconciler.Context, cm *v1.ConfigMap, c *v1alpha1.Pulsa
 	ctx.Logger().Info("Updating the bookkeeper configmap.",
 		"configMap.Name", cm.GetName(),
 		"ConfigMap.Namespace", cm.GetNamespace(), "NewReplicas", c.Spec.Size)
-	cm.Labels = c.GenerateLabels(true)
+	cm.Labels = c.GenerateLabels(false)
 	cm.Data = createConfigmapData(c)
 	return ctx.Client().Update(context.TODO(), cm)
 }
@@ -76,9 +88,9 @@ func updateConfigmap(ctx reconciler.Context, cm *v1.ConfigMap, c *v1alpha1.Pulsa
 func createConfigmapData(c *v1alpha1.PulsarCluster) map[string]string {
 	jvmOptions := c.Spec.JVMOptions
 	data := processEnvVarMap(map[string]string{
-		"managedLedgerDefaultEnsembleSize": "1",
-		"managedLedgerDefaultWriteQuorum":  "1",
-		"managedLedgerDefaultAckQuorum":    "1",
+		"managedLedgerDefaultEnsembleSize": "2",
+		"managedLedgerDefaultWriteQuorum":  "2",
+		"managedLedgerDefaultAckQuorum":    "2",
 		"statusFilePath":                   "/pulsar/status",
 		"clusterName":                      c.GetName(),
 		"zookeeperServers":                 c.Spec.ZookeeperServers,

@@ -38,6 +38,7 @@ var (
 		pulsarcluster2.ReconcileConfigMap,
 		pulsarcluster2.ReconcileJob,
 		pulsarcluster2.ReconcileStatefulSet,
+		pulsarcluster2.ReconcileClusterStatus,
 	}
 )
 
